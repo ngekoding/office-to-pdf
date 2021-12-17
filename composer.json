@@ -1,0 +1,25 @@
+{
+    "name": "ngekoding/office-to-pdf",
+    "description": "Convert any office files to pdf format",
+    "type": "library",
+    "config": {
+      "platform": {
+        "php": "5.6"
+      }
+    },
+    "license": "MIT",
+    "authors": [
+      {
+        "name": "Nur Muhammad",
+        "email": "blog.nurmuhammad@gmail.com"
+      }
+    ],
+    "autoload": {
+      "psr-4": { 
+        "ngekoding\\OfficeToPdf\\": "src/" 
+      }
+    },
+    "require": {
+        "symfony/process": "^3.4"
+    }
+}
