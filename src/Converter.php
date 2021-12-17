@@ -43,24 +43,30 @@ class Converter
      */
     public function convert($source, $destination = NULL)
     {
-        $outdir = '.';
+        $srcInfo = pathinfo($source);
+
+        $outdir = $srcInfo['dirname'];
         $filename = NULL;
 
         // Configure output directory and filename
         if (!empty($destination)) {
-            $pathinfo = pathinfo($destination);
-            $extension = isset($pathinfo['extension']) ? $pathinfo['extension'] : NULL;
+            $destInfo = pathinfo($destination);
+            $ext = isset($destInfo['extension']) ? $destInfo['extension'] : NULL;
 
-            if ($extension === 'pdf') {
-                $outdir = $pathinfo['dirname'];
-                $filename = $pathinfo['filename'].'.pdf';
+            if ($ext === 'pdf') {
+                $filename = $destInfo['basename'];
+                
+                // Change output directory if defined
+                if ($destInfo['dirname'] !== '.') {
+                    $outdir = $destInfo['dirname'];
+                }
             } else {
                 $outdir = $destination;
             }
         }
 
         $command = sprintf($this->baseCommand, $this->libreOfficePath, $outdir, $source);
-        
+
         $process = new Process($command);
         $process->run();
 
@@ -70,10 +76,8 @@ class Converter
 
         // Renaming the output file if needed
         if (!empty($filename)) {
-            $pathinfoSource = pathinfo($source);
-
             @rename(
-                $outdir.'/'.$pathinfoSource['filename'].'.'.$pathinfoSource['extension'],
+                $outdir.'/'.$srcInfo['filename'].'.pdf',
                 $outdir.'/'.$filename
             );
         }
