@@ -24,7 +24,7 @@ composer require ngekoding\office-to-pdf
 // Include autoloader
 require 'vendor/autoload.php';
 
-use ngekoding\OfficeToPdf\Converter;
+use Ngekoding\OfficeToPdf\Converter;
 
 $converter = new Converter();
 $converter->convert('path/to/file.docx');
