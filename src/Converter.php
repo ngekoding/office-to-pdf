@@ -1,6 +1,6 @@
 <?php
 
-namespace ngekoding\OfficeToPdf;
+namespace Ngekoding\OfficeToPdf;
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
