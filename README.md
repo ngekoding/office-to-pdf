@@ -30,7 +30,7 @@ $converter = new Converter();
 $converter->convert('path/to/file.docx');
 ```
 
-You can also convert other file type (not only .docx), feel free to convert any office file like `.pptx`, `.xlxs`, etc...
+You can also convert other file type (not only .docx), feel free to convert any office file like `.pptx`, `.xlsx`, etc...
 
 ### Setting manually LibreOffice executable path
 
