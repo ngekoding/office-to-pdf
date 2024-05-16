@@ -11,7 +11,7 @@ This library use LibreOffice power to convert any office files to PDF format. So
 ## Installation
 
 ```bash
-composer require ngekoding\office-to-pdf
+composer require ngekoding/office-to-pdf
 ```
 
 ## Usage
@@ -31,6 +31,17 @@ $converter->convert('path/to/file.docx');
 ```
 
 You can also convert other file type (not only .docx), feel free to convert any office file like `.pptx`, `.xlsx`, etc...
+
+### Setting process timeout
+
+By default processes have a timeout of 60 seconds, but you can change it passing a different timeout (in seconds) to the `setTimeout()` method:
+
+```php
+$converter = new Converter();
+$converter->setTimeout(3600);
+```
+
+Docs: [Symfony Process Timeout](https://symfony.com/doc/3.x/components/process.html#process-timeout)
 
 ### Setting manually LibreOffice executable path
 
