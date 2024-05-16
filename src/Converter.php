@@ -9,6 +9,7 @@ class Converter
 {
     private $libreOfficePath;
     private $baseCommand = '%s --headless --convert-to pdf --outdir %s %s';
+    private $timeout = 60;
 
     public function __construct($libreOfficePath = NULL)
     {
@@ -32,6 +33,24 @@ class Converter
         } else {
             return 'libreoffice';
         }
+    }
+
+    /**
+     * Sets the process timeout (max. runtime) in seconds.
+     * 
+     * To disable the timeout, set this value to null.
+     *
+     * docs: https://symfony.com/doc/3.x/components/process.html#process-timeout
+     * 
+     * @param int|float|null $timeout The timeout in seconds
+     *
+     * @return $this
+     */
+    public function setTimeout($timeout)
+    {
+        $this->timeout = $timeout;
+
+        return $this;
     }
 
     /**
@@ -68,6 +87,7 @@ class Converter
         $command = sprintf($this->baseCommand, $this->libreOfficePath, $outdir, $source);
 
         $process = new Process($command);
+        $process->setTimeout($this->timeout);
         $process->run();
 
         if (!$process->isSuccessful()) {
