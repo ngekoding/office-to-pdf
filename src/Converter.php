@@ -86,7 +86,12 @@ class Converter
 
         $command = sprintf($this->baseCommand, $this->libreOfficePath, $outdir, $source);
 
-        $process = new Process($command);
+        if (method_exists(Process::class, 'fromShellCommandline')) {
+            $process = Process::fromShellCommandline($command);   
+        } else {
+            $process = new Process($command);
+        }
+
         $process->setTimeout($this->timeout);
         $process->run();
 
